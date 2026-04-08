@@ -154,7 +154,8 @@ The model is slightly conservative, prioritizing detection of infected cells, wh
 ## Contributors
 
 * Natalia Mathews
-* [Your Friend's Name]
+* Limnisha Changkakati
+* Prema Malipatil
 
 ---
 
