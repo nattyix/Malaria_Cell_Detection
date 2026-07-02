@@ -1,170 +1,262 @@
-# Malaria_Cell_Detection
-Automated malaria detection using MobileNetV2 to classify blood cell images, deployed as a real-time web app over a 5G telemedicine network for rapid and accessible diagnosis.
-# Automated Malaria Detection System
+🦠 MalariaDetection AI
+AI-Powered Malaria Cell Detection using MobileNetV2 Transfer Learning and Streamlit
+<p align="center">
 
-## Overview
 
-This project presents an AI-based malaria detection system using a lightweight deep learning model (MobileNetV2) to classify blood smear images as Parasitized or Uninfected.
 
-The system is deployed as a real-time web application using a Python backend, enabling fast and reliable diagnosis suitable for resource-limited environments and telemedicine use cases.
 
----
 
-## Objectives
 
-* Automate malaria detection using deep learning
-* Provide rapid and accurate diagnosis
-* Enable deployment in low-resource healthcare settings
-* Support real-time inference through a web interface
 
----
 
-## Model Details
 
-* Model: MobileNetV2 (Transfer Learning)
-* Framework: TensorFlow / Keras
-* Key advantages:
 
-  * Lightweight (~2.4M parameters)
-  * Fast inference on CPU
-  * High accuracy with low computational cost
+</p>
+🌍 Overview
 
----
+MalariaVision AI is an intelligent deep learning application designed to automatically detect malaria-infected blood cells from microscopic blood smear images.
 
-## Dataset
+Built using MobileNetV2 Transfer Learning, the system provides fast and accurate predictions through an interactive Streamlit web application, enabling users to upload blood smear images and receive instant classification results with prediction confidence.
 
-* Source: NIH Malaria Cell Image Dataset
-* Total Images: 27,558
+Designed with lightweight architecture and optimized inference, the project demonstrates how Artificial Intelligence can assist healthcare professionals in rapid malaria screening, particularly in resource-constrained environments.
 
-  * 13,779 Parasitized
-  * 13,779 Uninfected
-* Split:
+🚀 Key Features
 
-  * 80% Training
-  * 20% Validation
+🦠 Binary Malaria Cell Classification
 
-Each image represents a single red blood cell under a microscope.
+🧠 MobileNetV2 Transfer Learning
 
----
+⚡ Real-Time Prediction
 
-## Preprocessing Pipeline
+📊 Confidence Score Visualization
 
-* Resize images to 128×128
-* Normalize pixel values (0–255 → 0–1)
-* Data augmentation (training only):
+📈 Live Prediction Statistics
 
-  * Rotation
-  * Flips
-  * Zoom
+📝 Prediction History Tracking
 
----
+🎨 Interactive Dark-Themed Streamlit Dashboard
 
-## Model Architecture
+🚀 Cached Model Loading for Faster Inference
 
-* MobileNetV2 base (pretrained on ImageNet, initially frozen)
-* Global Average Pooling
-* Batch Normalization
-* Dense layers with Dropout
-* Sigmoid output layer for binary classification
+📉 Training & Evaluation Visualization
 
----
+☁️ Deployment Ready
 
-## Training Strategy
+🧠 AI Pipeline
+Blood Smear Image
+        │
+        ▼
+ Image Preprocessing
+        │
+        ▼
+Resize & Normalize
+        │
+        ▼
+ MobileNetV2 Backbone
+        │
+        ▼
+ Feature Extraction
+        │
+        ▼
+Dense Classification Head
+        │
+        ▼
+ Binary Prediction
+ ├── Parasitized
+ └── Uninfected
+        │
+        ▼
+Confidence Score
+🏗️ Project Architecture
+                  User Upload
+                       │
+                       ▼
+          Microscopic Blood Cell Image
+                       │
+                       ▼
+             Image Preprocessing
+                       │
+                       ▼
+             MobileNetV2 CNN Model
+                       │
+             Feature Extraction
+                       │
+                       ▼
+           Fully Connected Layers
+                       │
+                       ▼
+        Binary Classification Output
+              ┌───────────────┐
+              ▼               ▼
+      Parasitized      Uninfected
+                       │
+                       ▼
+        Streamlit Dashboard Display
+📂 Project Structure
+MalariaVision-AI/
+│
+├── app.py                     # Streamlit web application
+├── malaria_detection.py       # Model training pipeline
+├── requirements.txt
+├── runtime.txt
+│
+├── training_history.png       # Training accuracy & loss plots
+├── evaluation_plots.png       # Confusion matrix & ROC analysis
+│
+└── README.md
+📊 Dataset
+NIH Malaria Cell Images Dataset
 
-### Phase 1: Frozen Base
+The model is trained using the NIH Malaria Cell Image Dataset, a benchmark dataset widely used for automated malaria diagnosis research.
 
-* Train only classification head
-* Learning rate: 0.001
-* Achieves ~90% validation accuracy
+Dataset Statistics
+Total Images: 27,558
+🦠 Parasitized Cells: 13,779
+✅ Uninfected Cells: 13,779
+Data Split
+80% Training
+20% Validation
+🧬 Deep Learning Model
+Component	Description
+Model	MobileNetV2
+Learning Method	Transfer Learning
+Framework	TensorFlow / Keras
+Classification	Binary
+Input Size	128 × 128 RGB Images
+Output	Parasitized / Uninfected
+📈 Training Strategy
 
-### Phase 2: Fine-Tuning
+The model is trained using a two-stage transfer learning approach.
 
-* Unfreeze top layers of MobileNetV2
-* Learning rate: 1e-5
-* Improves performance further
-* Early stopping applied
+🔹 Phase 1 — Feature Extraction
+Freeze MobileNetV2 backbone
+Train custom classification layers
+Adam Optimizer
+Learning Rate: 0.001
+🔹 Phase 2 — Fine-Tuning
+Unfreeze the final MobileNetV2 layers
+Lower Learning Rate (1e-5)
+Early Stopping
+ReduceLROnPlateau
+Model Checkpointing
 
----
+This strategy improves model generalization while preventing overfitting.
 
-## Results
+📈 Model Performance
+Metric	Performance
+Accuracy	94.3%
+AUC-ROC	0.9846
+Backbone	MobileNetV2
+Classification	Binary
+Deployment	Streamlit
+⚙️ Tech Stack
+Programming
+Python
+Deep Learning
+TensorFlow
+Keras
+MobileNetV2
+Machine Learning
+Scikit-learn
+Computer Vision
+OpenCV
+NumPy
+Pillow
+Visualization
+Matplotlib
+Deployment
+Streamlit
+🖥️ Installation
 
-* Accuracy: 94.3%
-* AUC-ROC: 0.9846
+Clone the repository
 
-The model is slightly conservative, prioritizing detection of infected cells, which is safer for screening scenarios.
+git clone https://github.com/yourusername/MalariaVision-AI.git
 
----
+Navigate to the project
 
-## Web Application
+cd MalariaVision-AI
 
-### Backend
+Install dependencies
 
-* Python (Flask via `app.py`)
+pip install -r requirements.txt
 
-### API Endpoints
+Run the application
 
-* POST /predict — Upload image and get prediction
-* GET /history — Retrieve prediction history
-* GET /stats — System statistics
+streamlit run app.py
+🚀 Usage
+Launch the Streamlit application.
+Upload a microscopic blood smear image.
+The image is automatically preprocessed.
+The AI model predicts whether the cell is infected.
+View prediction confidence and classification results.
+Monitor session statistics and prediction history.
+🌟 Dashboard Highlights
 
-### Features
+✅ Blood Smear Image Upload
 
-* Image upload and preview
-* Real-time prediction
-* Simple and user-friendly interface
+✅ AI-Based Malaria Detection
 
----
+✅ Prediction Confidence Scores
 
-## Workflow
+✅ Session Statistics
 
-1. User uploads a blood smear image
-2. Image is sent to backend API
-3. Model performs inference
-4. Prediction is returned
-5. Result is displayed
+✅ Prediction History
 
----
+✅ Interactive Dark UI
 
-## Performance
+✅ Fast Real-Time Inference
 
-* Inference time: ~225–272 ms
-* End-to-end latency: ~0.5s – 1.5s
+📊 Evaluation Metrics
 
----
+The project evaluates model performance using:
 
-## Key Highlights
+Accuracy
+Precision
+Recall
+ROC-AUC Score
+Confusion Matrix
+ROC Curve
+Training & Validation Loss
+Training & Validation Accuracy
+🔮 Future Improvements
+🔥 Grad-CAM Explainability
+📱 Mobile Application
+☁️ Cloud Deployment
+🌍 Multi-Class Parasite Detection
+📡 REST API Integration
+🩺 Clinical Decision Support
+⚡ Edge AI Optimization
+🧬 Vision Transformer (ViT) Architecture
+🤝 Contributing
 
-* Lightweight and efficient model
-* Real-time deployment (not just experimental)
-* Full dataset utilization
-* Two-phase fine-tuning approach
-* Suitable for telemedicine applications
+Contributions are welcome!
 
----
+Fork the repository
+Create a feature branch
+Commit your changes
+Push the branch
+Open a Pull Request
+📜 Disclaimer
 
-## Future Work
+This project is intended for educational and research purposes only.
 
-* Grad-CAM for model explainability
-* Multi-class malaria stage detection
-* Mobile/edge deployment
-* Broader dataset generalization
+It is not a certified medical diagnostic system and should not replace professional clinical judgment.
 
----
+👨‍💻 Authors
 
-## Contributors
+MalariaVision AI Team
 
-* Natalia Mathews
-* Limnisha Changkakati
-* Prema Malipatil
+Natalia Mathews
+Limnisha Changkakati
+Prema Malipatil
+🌟 Support
 
----
+If you found this project helpful,
 
-## License
+⭐ Star the repository
 
-This project is intended for educational and research purposes.
+🍴 Fork the project
 
----
+📢 Share it with others
 
-## Support
-
-If you find this project useful, consider giving it a star on GitHub.
+Together, let's build AI solutions that make healthcare more accessible and impactful. 🦠🚀
