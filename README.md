@@ -21,6 +21,9 @@ MalariaVision AI is a deep learning-powered healthcare application that automati
 
 Built using **MobileNetV2 Transfer Learning**, the application performs fast and reliable binary classification while providing an intuitive **Streamlit** interface for real-time predictions.
 
+Demo Link: https://huggingface.co/spaces/Natzi21/malaria-cell-detection
+
+
 ---
 
 # ✨ Features
